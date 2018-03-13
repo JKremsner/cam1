@@ -1,4 +1,4 @@
 {
   "port": 80,
-  "encrypted": true
+  "encrypted": false
 }
