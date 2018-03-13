@@ -2,11 +2,7 @@ FROM resin/raspberrypi3-node:6
 
 RUN apt-get update && apt-get install -yq libraspberrypi-bin
 
-RUN git clone https://github.com/FFmpeg/FFmpeg.git
-RUN cd FFmpeg
-RUN sudo ./configure --arch=armel --target-os=linux --enable-gpl --enable-omx --enable-omx-rpi --enable-nonfree
-RUN sudo make -j4
-RUN sudo make install
+RUN git clone https://github.com/FFmpeg/FFmpeg.git && cd FFmpeg && sudo ./configure --arch=armel --target-os=linux --enable-gpl --enable-omx --enable-omx-rpi --enable-nonfree && sudo make -j4 && sudo make install && cd ..
 
 WORKDIR usr/src/app
 
