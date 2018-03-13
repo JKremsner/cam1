@@ -1,10 +1,10 @@
-var express = require('express');
-var app = express();
-var cors = require('cors');
-var spawn = require('child_process').spawn;
-var ffmpeg = require('fluent-ffmpeg');
-var fs = require('fs');
-var crypto = require('crypto');
+let express = require('express');
+let app = express();
+let cors = require('cors');
+let spawn = require('child_process').spawn;
+let ffmpeg = require('fluent-ffmpeg');
+let fs = require('fs');
+let crypto = require('crypto');
 
 // Config information
 const config = require('./config.json');
@@ -12,9 +12,9 @@ const port = config.port;
 const encrypted = config.encrypted;
 
 // Camera stream options
-const raspividOptions = ['-o', '-', '-t', '0', '-vf', '-w', '1280', '-h', '720', '-fps', '25'];
+const raspividOptions = ['-o', '-', '-t', '0', '-vf', '-w', '1280', '-h', '720', '-fps', '25']; 
 const ffmpegInputOptions = ['-re'];
-const ffmpegOutputOptions = ['-vcodec copy', '-hls_flags devare_segments'];
+const ffmpegOutputOptions = ['-vcodec copy', '-hls_flags delete_segments'];
 
 // Public directory that stores the stream files
 const cameraDirectory = 'camera';
@@ -46,10 +46,10 @@ if (encrypted) {
 }
 
 // Start the camera stream
-var cameraStream = spawn('raspivid', raspividOptions);
+let cameraStream = spawn('raspivid', raspividOptions);
 
 // Convert the camera stream to hls
-var conversion = new ffmpeg(cameraStream.stdout).noAudio().format('hls').inputOptions(ffmpegInputOptions).outputOptions(ffmpegOutputOptions).output(`${cameraDirectory}/livestream.m3u8`);
+let conversion = new ffmpeg(cameraStream.stdout).noAudio().format('hls').inputOptions(ffmpegInputOptions).outputOptions(ffmpegOutputOptions).output(`${cameraDirectory}/livestream.m3u8`);
 
 // Set up stream conversion listeners
 conversion.on('error', function(err, stdout, stderr) {
