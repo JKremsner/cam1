@@ -33,9 +33,9 @@ if (encrypted) {
   const keyInfoFileName = 'enc.keyinfo';
 
   // Setup encryption
-  var keyFileContents = crypto.randomBytes(16);
-  var initializationVector = crypto.randomBytes(16).toString('hex');
-  var keyInfoFileContents = `${keyFileName}\n./${cameraDirectory}/${keyFileName}\n${initializationVector}`;
+  let keyFileContents = crypto.randomBytes(16);
+  let initializationVector = crypto.randomBytes(16).toString('hex');
+  let keyInfoFileContents = `${keyFileName}\n./${cameraDirectory}/${keyFileName}\n${initializationVector}`;
 
   // Populate the encryption files, overwrite them if necessary
   fs.writeFileSync(`./${cameraDirectory}/${keyFileName}`, keyFileContents);
